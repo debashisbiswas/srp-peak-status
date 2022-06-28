@@ -101,19 +101,19 @@ const updateState = () => {
             / 60
         )
 
-        // TODO: wouldn't you want to know the next peak change regardless of
-        // the current status? This would also require us to handle the case
-        // in which we're at the last status change of the day.
-        if (currentPeakStatus) {
+        if (nextPeakTime == 0) {
+            footer = '<p class="italic-sub">for the rest of the day</p>'
+        }
+        else {
             footer = `
                 <hr>
-                <h2 class="text-green">
-                    NEXT ${nextPeakStatus ? "ON-PEAK" : "OFF-PEAK"}:
-                    ${nextPeakTime % 12}${nextPeakTime > 12 ? 'PM' : 'AM'}
+                <h2 class="${nextPeakStatus ? 'text-red' : 'text-green'}">
+                    NEXT ${nextPeakStatus ? 'ON-PEAK' : 'OFF-PEAK'}:
+                    ${nextPeakTime % 12} ${nextPeakTime > 12 ? 'PM' : 'AM'}
                     <br>
-                    (in ${hoursToNextPeak} hr, ${minutesToNextPeak} min)
+                    (in ${hoursToNextPeak ? hoursToNextPeak + ' hr, ' : ''} ${minutesToNextPeak} min)
                 </h2>
-                <p class="text-italic">
+                <p class="italic-sub-small">
                     ${nextPrice} ¢/kWh
                 </p>
             `
@@ -121,10 +121,13 @@ const updateState = () => {
     }
 
     message = `
-        <h1 class="${currentPeakStatus ? 'text-red' : 'text-green'}">
-            ${currentPeakStatus ? 'ON-PEAK' : 'OFF-PEAK'}
+        <h1 id="time">
+            ${hour % 12}:${now.getMinutes()} ${hour > 12 ? 'PM' : 'AM'}
         </h1>
-        <p class="text-italic">
+        <h1 class="${currentPeakStatus ? 'text-red' : 'text-green'}">
+            NOW ${currentPeakStatus ? 'ON-PEAK' : 'OFF-PEAK'}
+        </h1>
+        <p class="italic-sub">
             ${currentPrice} ¢/kWh
         </p>
     `

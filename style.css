@@ -11,23 +11,29 @@ body {
     color: #ABB2BF;
 }
 
+@keyframes slideInFromBottom {
+  0% {
+    transform: translateY(-10%);
+    opacity: 0%;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 100%;
+  }
+}
+
+#output {
+  animation: slideInFromBottom 0.75s ease-out 0s;
+}
+
 h1 {
-    font-size: 4vh;
+    font-size: 5vh;
     margin-bottom: 0.5em;
 }
 
 h2 {
-    font-size: 3vh;
+    font-size: 3.5vh;
     margin-bottom: 0.5em;
-}
-
-p {
-    font-size: 2vh;
-}
-
-hr {
-    width: 120%;
-    margin-left: -10%;
 }
 
 .grid {
@@ -45,6 +51,14 @@ hr {
     color: #E06C75;
 }
 
-.text-italic {
+.italic-sub {
+    font-size: 3vh;
     font-style: italic;
+    color: #7F848E;
+}
+
+.italic-sub-small {
+    font-size: 2.5vh;
+    font-style: italic;
+    color: #7F848E;
 }
