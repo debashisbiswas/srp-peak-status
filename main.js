@@ -57,10 +57,6 @@ const months = {
     /* DEC */ 11: timePlans["winter"],
 }
 
-const addLeadingZero = (num) => {
-    return num < 9 ? '0' + num : num
-}
-
 const updateState = () => {
     const now = new Date()
     const month = now.getMonth()
@@ -124,9 +120,13 @@ const updateState = () => {
         }
     }
 
+    const currentTime = now.toLocaleTimeString([], {
+        hour: '2-digit', minute: '2-digit'
+    });
+
     message = `
         <h1 id="time">
-            ${addLeadingZero(hour % 12)}:${addLeadingZero(now.getMinutes())} ${hour > 12 ? 'PM' : 'AM'}
+            ${currentTime}
         </h1>
         <h1 class="${currentPeakStatus ? 'text-red' : 'text-green'}">
             NOW ${currentPeakStatus ? 'ON-PEAK' : 'OFF-PEAK'}
